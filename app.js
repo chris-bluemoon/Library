@@ -3,10 +3,15 @@ const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
+// const { Pool, Client }  = require('pg');
+// const pool = new Pool()
 
 const app = express();
 const port = process.env.PORT || 3000;
-const bookRouter = express.Router();
+const nav = [{ link: '/book', title: 'Book' },
+            { link: '/author', title: 'Author' }];
+            
+const bookRouter = require('./src/routes/bookRoutes')(nav);
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '/public/')));
@@ -22,7 +27,7 @@ app.get('/', (req, res) => {
     'index',
     {
       nav: [{ link: '/books', title: 'Books' },
-      { link: '/authors', title: 'Authors' }],
+        { link: '/authors', title: 'Authors' }],
       title: 'Library'
     }
   );
