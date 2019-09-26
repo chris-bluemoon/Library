@@ -16,50 +16,6 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist/')
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-const books = [
-  {
-    title: 'War and Peace',
-    genre: 'Historical Fiction',
-    author: 'Lev Niko Tolstoy',
-    read: false
-  },
-  {
-    title: 'Saw and Peace',
-    genre: 'Historical Fiction',
-    author: 'Lev Niko Tolstoy',
-    read: false
-  },
-  {
-    title: 'Par and Peace',
-    genre: 'Historical Fiction',
-    author: 'Lev Niko Tolstoy',
-    read: false
-  },
-  {
-    title: 'Car and Peace',
-    genre: 'Historical Fiction',
-    author: 'Lev Niko Tolstoy',
-    read: false
-  }
-];
-
-
-bookRouter.route('/')
-  .get((req, res) => {
-    res.render('books',
-      {
-        nav: [{ link: '/books', title: 'Books' },
-          { link: '/authors', title: 'Authors' }],
-        title: 'Library',
-        books
-      });
-  });
-
-bookRouter.route('/single')
-  .get((req, res) => {
-    res.send('hello single book');
-  });
-
 app.use('/books', bookRouter);
 app.get('/', (req, res) => {
   res.render(
